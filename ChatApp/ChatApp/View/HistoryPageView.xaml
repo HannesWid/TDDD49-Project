@@ -1,0 +1,48 @@
+﻿<Page x:Class="ChatApp.View.HistoryPageView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ChatApp.View"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="HistoryPageView"
+      Background="LightGray">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="8*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBox Grid.Column="1" HorizontalAlignment="Center" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Center" Width="513" RenderTransformOrigin="2.708,0.93" Text="{Binding ChatSearchString, UpdateSourceTrigger=PropertyChanged}"/>
+
+        <TextBlock Grid.Column="0" HorizontalAlignment="Center" Margin="23,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center"><Run Language="sv-se" Text="Old chats"/></TextBlock>
+        <Button Grid.Column="2" Content="Exit" HorizontalAlignment="Left" Margin="28,0,0,0" Grid.Row="3" VerticalAlignment="Center" Width="38" Command="{Binding Path=CloseHistory}"/>
+        <TextBlock Grid.Column="0" HorizontalAlignment="Left" Margin="34,0,0,0" Grid.Row="2" TextWrapping="Wrap" Text="Search old chats:" VerticalAlignment="Center"/>
+
+        <ListBox ItemsSource="{Binding OldChats}"
+             Grid.Row="1" Grid.Column="1"
+             SelectedItem="{Binding CurrentChatLog}">
+
+
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock TextWrapping="Wrap" Text="{Binding Path=ChatLogName}" VerticalAlignment="Center"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <Button Grid.Column="1" Content="Show chat" HorizontalAlignment="Left" Margin="23,0,0,0" Grid.Row="3" VerticalAlignment="Center" Width="64" Command="{Binding Path=ShowOldChat}"/>
+        <Button Grid.Column="2" Content="Search" HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Center" Margin="28,0,0,0" RenderTransformOrigin="0.543,1.376" Command="{Binding Path=FilterChats}"/>
+
+    </Grid>
+
+</Page>
